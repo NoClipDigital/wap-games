@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="mixer" :style="mixerStyles" @touchmove="testMove">
+<div class="mixer" :style="mixerStyles" @mousemove="trackMove" @touchmove="trackMove">
 
   <div class="knob" :style="knobStyles"/>
   {{sliderVal}}
@@ -30,11 +30,14 @@ export default {
     }
   },
   methods: {
-    testMove(e) {
-      // The Y position of your cursor over the element
-      let yCoord = e.touches[0].clientY - e.touches[0].target.offsetTop;
+    trackMove(e) {
 
-      // Limit that value to
+      let y = e.touches ? e.touches[0].clientY : e.clientY;
+      let offsetY = e.touches ? e.touches[0].target.offsetTop : e.target.offsetTop;
+
+      // The Y position of your cursor over the element
+      let yCoord = y - offsetY;
+
       let limitedVal = Math.max(Math.min(yCoord, this.mixerHeight), 0);
 
       this.sliderVal = 1 - (limitedVal / this.mixerHeight);
@@ -43,7 +46,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .mixer {
     background-color: grey;
     height: 150px;
@@ -55,6 +58,7 @@ export default {
     background-color: #eee;
     border-radius: 3px;
     height: 10px;
+    pointer-events: none;
     position: absolute;
     transform: translateY(50%);
     width: 20px;
