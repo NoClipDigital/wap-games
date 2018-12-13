@@ -2,7 +2,7 @@
 <div class="mixer" :style="mixerStyles" @mousemove="trackMove" @touchmove="trackMove">
 
   <div class="knob" :style="knobStyles"/>
-  {{sliderVal}}
+
 </div>
 </template>
 
@@ -14,7 +14,12 @@ export default {
   data() {
     return {
       mixerHeight: 150,
-      sliderVal: 0.5
+      sliderVal: 0
+    }
+  },
+  watch: {
+    sliderVal() {
+      this.$emit('change', this.sliderVal);
     }
   },
   computed: {
@@ -50,17 +55,19 @@ export default {
 .mixer {
     background-color: grey;
     height: 150px;
-    width: 10%;
+    width: 10px;
     position: relative;
+    margin-left: 30px;
 }
 
 .knob {
     background-color: #eee;
     border-radius: 3px;
     height: 10px;
+    left: 50%;
     pointer-events: none;
     position: absolute;
-    transform: translateY(50%);
+    transform: translate(-50%, 50%);
     width: 20px;
 }
 </style>

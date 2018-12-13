@@ -13,16 +13,22 @@ export default {
   name: "Waveform",
   data() {
     return {
+      currentBar: 0,
       bars: [],
       progress: 0,
       config: {
-        randomness: 0.8,
+        randomness: 0.9,
         noOfBars: 100,
         speed: 5,
         randomness: 0.5,
         barWidth: 5,
         barGap: 2
       }
+    }
+  },
+  watch: {
+    currentBar() {
+      this.$emit('update', this.bars[this.currentBar]);
     }
   },
   methods: {
@@ -39,8 +45,12 @@ export default {
       let leftPos = widthOffset + progressOffset + barOffset;
       let isHalfway = leftPos < (this.$el.offsetWidth / 2);
 
+      if(isHalfway && i > this.currentBar) {
+        this.currentBar = i;
+      }
+
       return {
-        backgroundColor: isHalfway ? 'yellow' : 'white',
+        backgroundColor: isHalfway ? 'yellow' : 'grey',
         height: (100 * bar) + '%',
         left: leftPos + 'px',
         marginRight: this.config.barGap + 'px',
@@ -68,13 +78,15 @@ export default {
       this.bars = bars;
     },
 
-    blurWave() {
+    processWave() {
       for (var i = 1; i < this.bars.length; i++) {
         let prev = this.bars[i - 1];
         let current = this.bars[i];
 
+        let sine = 0.4 - Math.sin(i / 3);
+
         let newCurrent = (prev * (1 - this.config.randomness)) + (current * this.config.randomness);
-        this.bars[i] = newCurrent;
+        this.bars[i] = Math.min(Math.max(newCurrent + (sine * 0.2), 0), 1);
 
       }
     }
@@ -86,7 +98,7 @@ export default {
   },
   mounted() {
     this.generateWave();
-    this.blurWave();
+    this.processWave();
   },
 }
 </script>
