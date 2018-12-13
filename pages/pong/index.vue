@@ -1,6 +1,7 @@
 <template>
 <div class="pong-game">
   <PongPaddle />
+  <PongBall />
 </div>
 </template>
 
@@ -9,7 +10,8 @@
 export default {
   name: "PongGame",
   components: {
-    PongPaddle: () => import('~/components/pong/PongPaddle.vue')
+    PongPaddle: () => import('~/components/pong/PongPaddle.vue'),
+    PongBall: () => import('~/components/pong/PongBall.vue')
   },
 }
 
