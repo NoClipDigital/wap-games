@@ -1,11 +1,36 @@
 <template>
-  <div>
+  <div class="game-wrap">
+    <button @click="enableFullscreen">Fullscreen</button>
     <nuxt/>
+
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    enableFullscreen() {
+      var doc = window.document;
+      var docEl = doc.documentElement;
+
+      var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+      var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+      if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+        requestFullScreen.call(docEl);
+      } else {
+        cancelFullScreen.call(doc);
+      }
+    }
+  }
+}
+
+
+</script>
+
 <style>
 html {
+  background-color: #57bcc6;
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
@@ -15,6 +40,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+.game-wrap {
+  height: 100vh;
+  overflow:hidden;
+  position: absolute;
+  width: 100vw;
 }
 
 *,

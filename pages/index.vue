@@ -1,18 +1,18 @@
 <template>
-  <section class="container">
-    <div>
-      <logo/>
-      <h1 class="title">
+<section class="container">
+  <div>
+    <logo/>
+    <h1 class="title">
         wap-games
       </h1>
-      <h2 class="subtitle">
+    <h2 class="subtitle">
         A bunch of games based on the hit podcast &#34;What Am Politics?&#34;
       </h2>
-      <div class="links">
-        <button @click="enableFullscreen">START</button>
-      </div>
+    <div class="links">
+      <button @click="enableFullscreen">START</button>
     </div>
-  </section>
+  </div>
+</section>
 </template>
 
 <script>
@@ -24,14 +24,23 @@ export default {
   },
   methods: {
     enableFullscreen() {
-      document.body.requestFullscreen()
+      var doc = window.document;
+      var docEl = doc.documentElement;
+
+      var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+      var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+      if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+        requestFullScreen.call(docEl);
+      } else {
+        cancelFullScreen.call(doc);
+      }
     }
   }
 }
 </script>
 
 <style>
-
 body {
   background-color: white;
 }
@@ -46,7 +55,7 @@ body {
 
 .title {
   font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
