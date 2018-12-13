@@ -1,7 +1,8 @@
 <template>
 <div class="slider-game">
+  <levelbar />
   <waveform ref="waveform" />
-  <mixer ref="waveform" />
+  <mixer />
   <button @click="startGame">Start</button>
 </div>
 </template>
@@ -17,6 +18,7 @@ export default {
   },
   components: {
     Waveform: () => import('~/components/slider/Waveform.vue'),
+    Levelbar: () => import('~/components/slider/Levelbar.vue'),
     Mixer: () => import('~/components/slider/Mixer.vue')
   },
   methods: {
