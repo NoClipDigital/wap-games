@@ -32,8 +32,7 @@ export default {
 .ball {
     height: 20px;
     width: 20px;
-    background-color: white;
-    border-radius: 50%;
+    background-color: red;
     position: absolute;
     top: 50%;
     left: 50%;
