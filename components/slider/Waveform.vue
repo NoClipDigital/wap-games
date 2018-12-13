@@ -16,7 +16,7 @@ export default {
       bars: [],
       progress: 0,
       config: {
-        randomness: 1,
+        randomness: 0.8,
         noOfBars: 100,
         speed: 5,
         randomness: 0.5,
@@ -26,6 +26,11 @@ export default {
     }
   },
   methods: {
+
+    start() {
+      this.startAnimation();
+    },
+
     barStyles(bar, i) {
       //
       let progressOffset = (this.$el.offsetWidth) * (1 - this.progress);
@@ -51,10 +56,6 @@ export default {
         progress: 1,
         easing: 'linear',
         duration: 20 * 1000
-        // update: function() {
-          // var el = document.querySelector('#JSobject pre');
-          // el.innerHTML = JSON.stringify(obj);
-        // }
       });
     },
     generateWave() {
@@ -72,7 +73,9 @@ export default {
         let prev = this.bars[i - 1];
         let current = this.bars[i];
 
-        this.bars[i] = (prev + (current * this.config.randomness)) / (this.config.randomness + 1);
+        let newCurrent = (prev * (1 - this.config.randomness)) + (current * this.config.randomness);
+        this.bars[i] = newCurrent;
+
       }
     }
   },
@@ -82,10 +85,8 @@ export default {
     }
   },
   mounted() {
-    console.dir(this.$el);
     this.generateWave();
     this.blurWave();
-    this.startAnimation();
   },
 }
 </script>

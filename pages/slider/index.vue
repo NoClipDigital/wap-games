@@ -1,6 +1,8 @@
 <template>
 <div class="slider-game">
-  <waveform />
+  <waveform ref="waveform" />
+  <mixer ref="waveform" />
+  <button @click="startGame">Start</button>
 </div>
 </template>
 
@@ -8,10 +10,20 @@
 
 export default {
   name: "SliderGame",
-  components: {
-    Waveform: () => import('~/components/slider/Waveform.vue')
-  },
+  data() {
+    return {
 
+    }
+  },
+  components: {
+    Waveform: () => import('~/components/slider/Waveform.vue'),
+    Mixer: () => import('~/components/slider/Mixer.vue')
+  },
+  methods: {
+    startGame() {
+      this.$refs.waveform.start();
+    }
+  }
 }
 </script>
 
