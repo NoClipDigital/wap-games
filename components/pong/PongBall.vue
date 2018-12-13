@@ -17,7 +17,9 @@ export default {
   props: {
   //  player: ;
   },
-  methods: {},
+  methods: {
+    // Ball Logic.
+  },
   computed: {
     paddleStyles() {
       return {left:'90%'}
