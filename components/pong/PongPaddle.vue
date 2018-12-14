@@ -1,7 +1,8 @@
 <template lang="html">
-<div class="hit-box">
+<div class="hit-box" :style="hitBoxStyles" @mousemove="trackMove" @touchmove="trackMove">
   <div class="pong-paddle" :style="paddleStyles">
   </div>
+
 </div>
 </template>
 
@@ -12,7 +13,8 @@ export default {
   name: "PongPaddle",
   data() {
     return {
-        hitBox: 150,
+        paddleVal: 50,
+        screenWidth: window.innerWidth
       }
     },
   props: {
@@ -22,25 +24,26 @@ export default {
     trackMove(e) {
 
       let x = e.touches ? e.touches[0].clientX : e.clientX;
-      let offsetX = e.touches ? e.touches[0].target.offsetLeft : e.target.offsetLeft;
+      let offsetX =
+        e.touches ? e.touches[0].target.offsetLeft : e.target.offsetLeft;
 
       // The X position of your cursor over the element
       let xCoord = x - offsetX;
+      // Convert pixel to percentage
+      xCoord = (xCoord / this.screenWidth) * 100;
 
-      let limitedVal = Math.max(Math.min(xCoord, this.hitBoxWidth), 0);
-
-      this.sliderVal = 1 - (limitedVal / this.hitBoxWidth);
+      this.paddleVal = xCoord;
     }
   },
   computed: {
     paddleStyles() {
       return {
-        left:100 * this.sliderVal + '%'
+        left: this.paddleVal + '%'
       }
     },
     hitBoxStyles() {
       return {
-        height: this.hitBoxWidth + 'px'
+        width: 100 + '%'
       }
     }
   },
@@ -49,21 +52,21 @@ export default {
 
 <style lang="scss">
 .pong-paddle {
-    height: 20px;
+    height: 4vh;
     width: 100px;
     background-color: white;
     position: absolute;
     top: 50%;
     left: 50%;
+    pointer-events: none;
     transform: translate(-50%,-50%);
 }
 .hit-box {
-    height: 60px;
+    height: 12vh;
     width: 100%;
-    background-color: grey;
+    // background-color: grey;
     position: absolute;
     top: 0%;
-    left: 50%;
-    transform: translate(-50%,0);
+    left: 0%;
 }
 </style>
