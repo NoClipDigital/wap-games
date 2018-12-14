@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="ball">
+<div class="ball" :style="ballStyles">
 
 </div>
 </template>
@@ -11,20 +11,60 @@ export default {
   name: "PongBall",
   data() {
     return {
-
-      }
-    },
+      position: {
+        x: 0.5,
+        y: 0.5
+      },
+      velocity: {
+        x: 0.01,
+        y: 0.01 * 0.5625
+      },
+    }
+  },
   props: {
-  //  player: ;
+    //  player: ;
   },
   methods: {
     // Ball Logic.
-  },
-  computed: {
-    paddleStyles() {
-      return {left:'90%'}
+    shouldIBounce() {
+      return false;
+    },
+    step(timestamp) {
+      // doMaths();
+      // console.log('timestamp',timestamp)
+      // if (!complete) {
+      let newPositionx =
+            this.position.x + this.velocity.x;
+      let newPositiony =
+            this.position.y + this.velocity.y;
+
+        if (newPositionx >= 1 || newPositionx <= 0) {
+          this.velocity.x *= -1
+        };
+        // Remove after testing because it will never bounce off the short ends.
+        if (newPositiony >= 0.95 || newPositiony <= 0.05) {
+          this.velocity.y *= -1
+        };
+
+        this.position.x = newPositionx;
+        this.position.y = newPositiony;
+        window.requestAnimationFrame(this.step);
+      // }
     }
   },
+  computed: {
+    ballStyles() {
+      let left = this.position.x * 100 + '%';
+      let top = this.position.y * 100 + '%';
+
+      return {
+        left, top
+      }
+    }
+  },
+  mounted() {
+    window.requestAnimationFrame(this.step);
+  }
 }
 </script>
 
