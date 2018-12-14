@@ -53,7 +53,7 @@ export default {
 <style lang="scss">
 .pong-paddle {
     height: 4vh;
-    width: 100px;
+    width: 30vw;
     background-color: white;
     position: absolute;
     top: 50%;

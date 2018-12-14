@@ -1,7 +1,7 @@
 <template>
 <div class="pong-game">
   <PongPaddle />
-  <!-- <PongBall /> -->
+  <PongBall />
 </div>
 </template>
 
