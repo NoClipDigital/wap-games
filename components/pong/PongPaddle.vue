@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="hit-box" :style="hitBoxStyles" @mousemove="trackMove" @touchmove="trackMove">
+<div class="hit-box" @mousemove="trackMove" @touchmove="trackMove">
   <div class="pong-paddle" :style="paddleStyles">
   </div>
 
@@ -40,11 +40,6 @@ export default {
       return {
         left: this.paddleVal + '%'
       }
-    },
-    hitBoxStyles() {
-      return {
-        width: 100 + '%'
-      }
     }
   },
 }
@@ -66,7 +61,7 @@ export default {
     width: 100%;
     // background-color: grey;
     position: absolute;
-    top: 0%;
+    //top: 0%;
     left: 0%;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
 <div class="pong-game">
-  <PongPaddle />
+  <PongPaddle class="player1"/>
   <PongBall />
+  <PongPaddle class="player2"/>
 </div>
 </template>
 
@@ -21,5 +22,12 @@ export default {
 body {
   background-color: white;
 }
-
+.player1 {
+  position: absolute;
+  top: 0;
+}
+.player2 {
+  position: absolute;
+  bottom: 0;
+}
 </style>
