@@ -13,6 +13,7 @@ export default {
   name: "Waveform",
   data() {
     return {
+      animation: undefined,
       currentBar: 0,
       bars: [],
       progress: 0,
@@ -34,7 +35,20 @@ export default {
   methods: {
 
     start() {
+      if(this.animation) {
+        this.animation.pause();
+      }
+      
+      this.resetVals();
+      this.generateWave();
+      this.processWave();
       this.startAnimation();
+    },
+
+    resetVals() {
+      this.currentBar = 0;
+      this.bars = [];
+      this.progress = 0;
     },
 
     barStyles(bar, i) {
@@ -50,7 +64,7 @@ export default {
       }
 
       return {
-        backgroundColor: isHalfway ? 'yellow' : 'grey',
+        backgroundColor: isHalfway ? 'yellow' : '#ddd',
         height: (100 * bar) + '%',
         left: leftPos + 'px',
         marginRight: this.config.barGap + 'px',
@@ -58,16 +72,17 @@ export default {
         transform: `translateY(-50%)`,
         width: this.config.barWidth + 'px'
       }
-
     },
+
     startAnimation() {
-      var JSobject = anime({
+      this.animation = anime({
         targets: this,
         progress: 1,
         easing: 'linear',
         duration: 20 * 1000
       });
     },
+
     generateWave() {
       let bars = [];
 
@@ -97,8 +112,7 @@ export default {
     }
   },
   mounted() {
-    this.generateWave();
-    this.processWave();
+
   },
 }
 </script>

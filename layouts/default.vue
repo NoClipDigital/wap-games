@@ -1,8 +1,7 @@
 <template>
   <div class="game-wrap">
-    <button @click="enableFullscreen">Fullscreen</button>
+    <button class="fullscreen" @click="enableFullscreen">Fullscreen</button>
     <nuxt/>
-
   </div>
 </template>
 
@@ -40,6 +39,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+.fullscreen {
+  position: relative;
+  z-index: 2;
 }
 
 .game-wrap {

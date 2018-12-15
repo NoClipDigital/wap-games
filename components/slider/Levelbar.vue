@@ -1,6 +1,8 @@
 <template lang="html">
 <div class="levelbar">
+  <div class="led-wrap" :style="barStyles()">
   <div class="led" v-for="led of ledCount" :style="ledStyles(led)" />
+</div>
 </div>
 </template>
 
@@ -11,23 +13,38 @@ export default {
   name: "Levelbar",
   data() {
     return {
-      ledCount: 30,
+      ledCount: 20,
+      barHeight: 200,
+      barWidth: 50,
+      barGap: 2
     }
   },
   methods: {
+    barStyles() {
+      return {
+        height: this.barHeight + 'px',
+        width: this.barWidth + 'px'
+      }
+    },
     ledStyles(i) {
 
-      let isLit = i / this.ledCount <= this.level;
+      i--;
+
+      let isLit = i / this.ledCount < this.level;
 
       let color = 'lime';
 
-      if (i >= 25) {
+      if (i >= 15) {
         color = 'red';
-      } else if (i >= 20) {
+      } else if (i >= 10) {
         color = 'yellow'
       }
 
+      let ledHeight = this.barHeight / this.ledCount;
+
       return {
+        height: (ledHeight - this.barGap) + 'px',
+        bottom: i * ledHeight + 'px',
         opacity: isLit ? 0.9 : 0.3,
         backgroundColor: color
       }
@@ -41,19 +58,23 @@ export default {
 
 <style lang="scss" scoped>
 .levelbar {
-    background-color: black;
-    color: white;
-    display: flex;
-    justify-content: space-between;
+    background-color: rgba(0,0,0,0.75);
+    padding: 10px;
+}
 
+.led-wrap {
+    text-align: center;
+    display: block;
+    position: relative;
 }
 
 .led {
     background-color: lime;
-    height: 5px;
-    flex-grow: 1;
-    margin: 1px;
+    border-radius: 3px;
     display: inline-block;
+    left: 0;
+    position: absolute;
     transition: 0.1s opacity;
+    width: 100%;
 }
 </style>
