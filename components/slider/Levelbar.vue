@@ -16,7 +16,7 @@ export default {
       ledCount: 20,
       barHeight: 200,
       barWidth: 50,
-      barGap: 2
+      barGap: 5
     }
   },
   methods: {
@@ -58,11 +58,15 @@ export default {
 
 <style lang="scss" scoped>
 .levelbar {
-    background-color: rgba(0,0,0,0.75);
+    background-color: #333;
+    overflow: hidden;
     padding: 10px;
+    border-radius: 100px;
 }
 
 .led-wrap {
+    overflow: hidden;
+    border-radius: 100px;
     text-align: center;
     display: block;
     position: relative;

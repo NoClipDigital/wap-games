@@ -22,8 +22,8 @@ export default {
         noOfBars: 100,
         speed: 5,
         randomness: 0.5,
-        barWidth: 5,
-        barGap: 2
+        barWidth: 8,
+        barGap: 4
       }
     }
   },
@@ -38,7 +38,7 @@ export default {
       if(this.animation) {
         this.animation.pause();
       }
-      
+
       this.resetVals();
       this.generateWave();
       this.processWave();
@@ -81,6 +81,10 @@ export default {
         easing: 'linear',
         duration: 20 * 1000
       });
+
+      this.animation.complete = () => {
+        this.$emit('complete');
+      };
     },
 
     generateWave() {
@@ -104,6 +108,7 @@ export default {
         this.bars[i] = Math.min(Math.max(newCurrent + (sine * 0.2), 0), 1);
 
       }
+
     }
   },
   computed: {
@@ -127,5 +132,6 @@ export default {
 .bar {
     background-color: white;
     position: absolute;
+    border-radius: 30px;
 }
 </style>

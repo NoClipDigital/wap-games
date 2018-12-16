@@ -11,7 +11,7 @@ export default {
   name: "Mixer",
   data() {
     return {
-      mixerHeight: 150,
+      mixerHeight: 200,
       sliderVal: 0
     }
   },
@@ -62,20 +62,23 @@ export default {
 
 <style lang="scss" scoped>
 .mixer {
-    background-color: grey;
+    background-color: #333;
+    border-radius: 10px;
     height: 150px;
     width: 20px;
     position: relative;
 }
 
 .knob {
+
     background-color: #eee;
-    border-radius: 3px;
-    height: 20px;
+    border-radius: 50px;
+    border: 5px solid #333;
+    height: 30px;
     left: 50%;
     pointer-events: none;
     position: absolute;
     transform: translate(-50%, 50%);
-    width: 40px;
+    width: 80px;
 }
 </style>

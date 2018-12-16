@@ -1,16 +1,17 @@
 <template>
 <div class="slider-game">
 
+  <SliderResults :scores="score" />
+
   <div class="top-half half">
     <levelbar :level="levelVal('a')" />
-    <mixer @change="setMixerVal" mixer-id="a" :reverse="true" /> Accuracy: {{ Math.floor(100 - score.a)}}%
+    <mixer @change="setMixerVal" mixer-id="a" :reverse="true" />
   </div>
 
   <button class="start-btn" @click="startGame">Start</button>
-  <waveform class="waveform" @update="setAudioVal" ref="waveform" />
+  <waveform class="waveform" @complete="showResults" @update="setAudioVal" ref="waveform" />
 
   <div class="bottom-half half">
-    Accuracy: {{ Math.floor(100 - score.b)}}%
     <levelbar :level="levelVal('b')" />
     <mixer @change="setMixerVal" mixer-id="b" />
   </div>
