@@ -37,7 +37,7 @@ export default {
       if (i >= 15) {
         color = 'red';
       } else if (i >= 10) {
-        color = 'yellow'
+        color = '#f9bf62'
       }
 
       let ledHeight = this.barHeight / this.ledCount;

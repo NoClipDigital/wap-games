@@ -71,7 +71,7 @@ export default {
 
 .knob {
 
-    background-color: #eee;
+    background-color: #f9bf62;
     border-radius: 50px;
     border: 5px solid #333;
     height: 30px;
@@ -80,5 +80,16 @@ export default {
     position: absolute;
     transform: translate(-50%, 50%);
     width: 80px;
+
+    &:after {
+      content: '';
+      width: 30px;
+      height: 10px;
+      border-radius: 10px;
+      position: absolute;
+      top: 5px;
+      left: 20px;
+      background-color: rgba(255,255,255,0.5);
+    }
 }
 </style>

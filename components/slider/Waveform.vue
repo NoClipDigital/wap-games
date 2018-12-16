@@ -1,6 +1,7 @@
 <template lang="html">
 <div class="waveform">
   <div class="wave-container" :style="{width:  + 'px'}">
+    <div class="line"/>
     <div class="bar" v-for="(bar, i) of bars" :style="barStyles(bar, i)"></div>
   </div>
 </div>
@@ -64,7 +65,7 @@ export default {
       }
 
       return {
-        backgroundColor: isHalfway ? 'yellow' : '#ddd',
+        backgroundColor: isHalfway ? '#f9bf62' : '#ddd',
         height: (100 * bar) + '%',
         left: leftPos + 'px',
         marginRight: this.config.barGap + 'px',
@@ -127,6 +128,17 @@ export default {
     height: 10vh;
     position: relative;
     white-space: nowrap;
+
+    .line {
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      border-radius: 5px;
+      border: 2px dashed #2b939d;
+      // background-color: #2b939d;
+      z-index: 3;
+    }
 }
 
 .bar {

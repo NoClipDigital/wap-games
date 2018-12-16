@@ -1,7 +1,7 @@
 <template>
 <div class="slider-game">
 
-  <SliderResults :scores="score" />
+  <SliderResults @click.native="startGame" v-if="showResults" :scores="score" />
 
   <div class="top-half half">
     <levelbar :level="levelVal('a')" />
@@ -9,7 +9,7 @@
   </div>
 
   <button class="start-btn" @click="startGame">Start</button>
-  <waveform class="waveform" @complete="showResults" @update="setAudioVal" ref="waveform" />
+  <waveform class="waveform" @complete="triggerResults" @update="setAudioVal" ref="waveform" />
 
   <div class="bottom-half half">
     <levelbar :level="levelVal('b')" />
@@ -24,6 +24,7 @@ export default {
   name: "SliderGame",
   data() {
     return {
+      showResults: false,
       mixerVal: {
         a: 0,
         b: 0
@@ -45,7 +46,9 @@ export default {
     Levelbar: () =>
       import ('~/components/slider/Levelbar.vue'),
     Mixer: () =>
-      import ('~/components/slider/Mixer.vue')
+      import ('~/components/slider/Mixer.vue'),
+    SliderResults: () =>
+      import ('~/components/slider/SliderResults.vue')
   },
   computed: {
 
@@ -54,7 +57,7 @@ export default {
     levelVal(id) {
       // let difficulty = 0.1;
       // let multiplier = (this.mixerVal[id]) + (0.5 * (1 - difficulty));
-      return this.audioVal * (0.5 + this.mixerVal[id]);
+      return this.audioVal * (this.mixerVal[id] * 2);
     },
     resetVals() {
       this.mixerVal = {
@@ -72,10 +75,14 @@ export default {
       };
     },
     startGame() {
+      this.showResults = false;
       this.$refs.waveform.start();
       setTimeout(() => {
         this.resetVals();
       }, 10);
+    },
+    triggerResults() {
+      this.showResults = true;
     },
     setMixerVal({
       val,
@@ -89,7 +96,10 @@ export default {
       this.setScore('b');
     },
     setScore(id) {
-      this.delta[id] = (Math.abs(this.audioVal - (1 - this.mixerVal[id])));
+      // this.delta[id] = (Math.abs(this.audioVal - (1 - this.mixerVal[id])));
+      // this.score[id] += this.delta[id];
+
+      this.delta[id] = Math.abs(this.levelVal(id) - 0.5);
       this.score[id] += this.delta[id];
 
     }
