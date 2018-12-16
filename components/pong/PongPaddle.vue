@@ -13,19 +13,23 @@ export default {
   name: "PongPaddle",
   data() {
     return {
-        paddleVal: 50,
+        paddleVal: this.paddlePosition,
         screenWidth: window.innerWidth
       }
     },
   props: {
   //  player: ;
+      paddlePosition: {
+        type: Number,
+        default: 50,
+      }
   },
   methods: {
     trackMove(e) {
 
-      let x = e.touches ? e.touches[0].clientX : e.clientX;
+      let x = e.targetTouches ? e.targetTouches[0].clientX : e.clientX;
       let offsetX =
-        e.touches ? e.touches[0].target.offsetLeft : e.target.offsetLeft;
+        e.targetTouches ? e.targetTouches[0].target.offsetLeft : e.target.offsetLeft;
 
       // The X position of your cursor over the element
       let xCoord = x - offsetX;
