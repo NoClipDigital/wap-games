@@ -35,9 +35,9 @@ export default {
   methods: {
     trackMove(e) {
 
-      console.log(e.touches.length);
 
-      let y = e.touches ? e.touches[0].clientY : e.clientY;
+
+      let y = e.targetTouches ? e.targetTouches[0].clientY : e.clientY;
       const rect = e.target.getBoundingClientRect();
 
       let offsetY = rect.top;
