@@ -12,6 +12,14 @@ export default {
   name: "PongBall",
   data() {
     return {
+      position: {
+        x: 0.3,
+        y: 0.5
+      },
+      velocity: {
+        x: 0.005,
+        y: 0.005 * 0.5625
+      },
       wall: {
         top: 0.9,
         right: 0.96,
@@ -22,14 +30,6 @@ export default {
     }
   },
   props: {
-    position: {
-      x: Number,
-      y: Number
-    },
-    velocity: {
-      x: Number,
-      y: Number
-    },
     paddles: {
       type: Object,
       default: function() {
@@ -62,14 +62,21 @@ export default {
       //  Check if the ball is off the screen and tell my Mom.
 
       if (this.position.y >= this.wall.top || this.position.y <= this.wall.bottom) {
-         this.$emit('reset', {
+         this.$emit('score', {
            position: this.position
         });
+        this.resetBall();
       };
 
       this.position.x = newPositionx;
       this.position.y = newPositiony;
       window.requestAnimationFrame(this.step);
+    },
+    resetBall() {
+      this.position.x = 0.3;
+      this.position.y = 0.5;
+      this.velocity.x = 0.005;
+      this.velocity.y = 0.005 * 0.5625;
     }
   },
   computed: {

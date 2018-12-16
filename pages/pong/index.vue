@@ -1,7 +1,7 @@
 <template>
 <div class="pong-game">
   <PongPaddle :paddlePosition="paddles.a" paddle-id="a" class="playerA" @change="setPaddlePosition" />
-  <PongBall :position="ball.position" :velocity="ball.velocity" :paddles="paddles" @reset="resetBall"/>
+  <PongBall :paddles="paddles" @score="recordScore"/>
   <PongPaddle :paddlePosition="paddles.b" paddle-id="b" class="playerB" @change="setPaddlePosition" />
 </div>
 </template>
@@ -18,16 +18,6 @@ export default {
       paddles: {
         a: 50,
         b: 50
-      },
-      ball: {
-        position: {
-          x: 0.3,
-          y: 0.5
-        },
-        velocity: {
-          x: 0.005,
-          y: 0.005 * 0.5625
-        }
       }
     }
   },
@@ -38,21 +28,13 @@ export default {
     }) {
       this.paddles[id] = val;
     },
-    resetBall({position}) {
+    recordScore({position}) {
       if (position.y <= 0) {
         console.log("Point for Player A!");
-        this.initBall();
       } else if (position.y >= 1) {
         console.log("Point for Player B!");
-        this.initBall();
       }
     },
-    initBall() {
-      this.ball.position.x = 0.3;
-      this.ball.position.y = 0.5;
-      this.ball.velocity.x = 0.005;
-      this.ball.velocity.y = 0.005 * 0.5625;
-    }
   }
 }
 </script>
