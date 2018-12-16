@@ -1,8 +1,8 @@
 <template>
 <div class="pong-game">
-  <PongPaddle :paddlePostion="paddles.a" paddle-id="a" class="playerA" />
+  <PongPaddle :paddlePosition="paddles.a" paddle-id="a" class="playerA" @change="setPaddlePosition" />
   <PongBall />
-  <PongPaddle :paddlePostion="paddles.b" paddle-id="b" class="playerB" @change="setPaddlePosition"/>
+  <PongPaddle :paddlePosition="paddles.b" paddle-id="b" class="playerB" @change="setPaddlePosition" />
 </div>
 </template>
 
@@ -22,9 +22,11 @@ export default {
     }
   },
   methods: {
-    setPaddlePosition({id,xCoord}) {
-      console.log(id,xCoord)
-      this.paddles[id] = xCoord;
+    setPaddlePosition({
+      id,
+      val
+    }) {
+      this.paddles[id] = val;
     }
   }
 }
