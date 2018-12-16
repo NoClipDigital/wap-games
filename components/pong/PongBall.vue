@@ -12,6 +12,7 @@ export default {
   name: "PongBall",
   data() {
     return {
+      gameOver: false,
       position: {
         x: 0.3,
         y: 0.5
@@ -33,7 +34,10 @@ export default {
     paddles: {
       type: Object,
       default: function() {
-        return { a: 50, b: 50}
+        return {
+          a: 50,
+          b: 50
+        }
       }
     }
   },
@@ -62,21 +66,29 @@ export default {
       //  Check if the ball is off the screen and tell my Mom.
 
       if (this.position.y >= this.wall.top || this.position.y <= this.wall.bottom) {
-         this.$emit('score', {
-           position: this.position
+        this.$emit('score', {
+          position: this.position
         });
         this.resetBall();
       };
 
-      this.position.x = newPositionx;
-      this.position.y = newPositiony;
-      window.requestAnimationFrame(this.step);
+      if (!this.gameOver) {
+        this.position.x = newPositionx;
+        this.position.y = newPositiony;
+        window.requestAnimationFrame(this.step);
+      }
     },
     resetBall() {
       this.position.x = 0.3;
       this.position.y = 0.5;
       this.velocity.x = 0.005;
       this.velocity.y = 0.005 * 0.5625;
+      this.gameOver = true;
+
+      setTimeout(() => {
+        this.gameOver = false;
+        window.requestAnimationFrame(this.step);
+      },100);
     }
   },
   computed: {
