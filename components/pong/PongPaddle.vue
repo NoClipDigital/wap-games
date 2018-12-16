@@ -1,6 +1,7 @@
 <template lang="html">
 <div class="hit-box" @mousemove="trackMove" @touchmove="trackMove">
   <div class="pong-paddle" :style="paddleStyles">
+    {{paddlePosition}}
   </div>
 
 </div>
@@ -18,10 +19,13 @@ export default {
       }
     },
   props: {
-  //  player: ;
+      paddleId: {
+        type: String,
+        required: true,
+      },
       paddlePosition: {
-        type: Number,
-        default: 50,
+        type: Number//,
+        //default: 25,
       }
   },
   methods: {
@@ -33,10 +37,11 @@ export default {
 
       // The X position of your cursor over the element
       let xCoord = x - offsetX;
+      console.log(x,offsetX)
       // Convert pixel to percentage
       xCoord = (xCoord / this.screenWidth) * 100;
-
-      this.paddleVal = xCoord;
+      this.$emit('change', {id: this.paddleId,val: xCoord})
+      // this.paddleVal = xCoord;
     }
   },
   computed: {
