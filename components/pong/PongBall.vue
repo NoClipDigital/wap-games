@@ -2,6 +2,7 @@
 <div class="ball" :style="ballStyles">
 
 </div>
+
 </template>
 
 <script>
@@ -28,7 +29,12 @@ export default {
     }
   },
   props: {
-    //  player: ;
+    paddles: {
+      type: Object,
+      default: function() {
+        return { a: 50, b: 50}
+      }
+    }
   },
   methods: {
     // Ball Logic.

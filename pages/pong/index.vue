@@ -1,7 +1,7 @@
 <template>
 <div class="pong-game">
   <PongPaddle :paddlePosition="paddles.a" paddle-id="a" class="playerA" @change="setPaddlePosition" />
-  <PongBall />
+  <PongBall :paddles="paddles"/>
   <PongPaddle :paddlePosition="paddles.b" paddle-id="b" class="playerB" @change="setPaddlePosition" />
 </div>
 </template>

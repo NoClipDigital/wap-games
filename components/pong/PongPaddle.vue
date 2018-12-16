@@ -20,8 +20,8 @@ export default {
       required: true,
     },
     paddlePosition: {
-      type: Number //,
-      //default: 25,
+      type: Number,
+      default: 50,
     }
   },
   methods: {
