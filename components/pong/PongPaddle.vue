@@ -1,8 +1,6 @@
 <template lang="html">
 <div class="hit-box" @mousemove="trackMove" @touchmove="trackMove">
-  <div class="pong-paddle" :style="paddleStyles">
-  </div>
-
+  <div class="pong-paddle" :style="paddleStyles"></div>
 </div>
 </template>
 
@@ -13,16 +11,18 @@ export default {
   name: "PongPaddle",
   data() {
     return {
-        paddleVal: this.paddlePosition,
-        screenWidth: window.innerWidth
-      }
-    },
+      screenWidth: window.innerWidth
+    }
+  },
   props: {
-  //  player: ;
-      paddlePosition: {
-        type: Number,
-        default: 50,
-      }
+    paddleId: {
+      type: String,
+      required: true,
+    },
+    paddlePosition: {
+      type: Number,
+      default: 50,
+    }
   },
   methods: {
     trackMove(e) {
@@ -33,16 +33,19 @@ export default {
 
       // The X position of your cursor over the element
       let xCoord = x - offsetX;
+
       // Convert pixel to percentage
       xCoord = (xCoord / this.screenWidth) * 100;
-
-      this.paddleVal = xCoord;
+      this.$emit('change', {
+        id: this.paddleId,
+        val: xCoord
+      });
     }
   },
   computed: {
     paddleStyles() {
       return {
-        left: this.paddleVal + '%'
+        left: this.paddlePosition + '%'
       }
     }
   },
@@ -66,6 +69,6 @@ export default {
     // background-color: grey;
     position: absolute;
     //top: 0%;
-    left: 0%;
+    left: 0;
 }
 </style>
