@@ -1,12 +1,17 @@
 <template>
-  <div class="game-wrap">
-    <button class="fullscreen" @click="enableFullscreen">Fullscreen</button>
-    <nuxt/>
-  </div>
+<div class="game-wrap" :style="{height: windowHeight + 'px'}">
+  <button class="fullscreen" @click="enableFullscreen">Fullscreen</button>
+  <nuxt/>
+</div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      windowHeight: 0
+    }
+  },
   methods: {
     enableFullscreen() {
       var doc = window.document;
@@ -21,70 +26,94 @@ export default {
         cancelFullScreen.call(doc);
       }
     }
+  },
+  mounted() {
+    // Disable scrolling.
+    document.ontouchmove = (e) => {
+      e.preventDefault();
+    }
+
+    setInterval(() => {
+      this.windowHeight = window.innerHeight
+    }, 1000);
+
+    this.windowHeight = window.innerHeight
+
   }
 }
-
-
 </script>
 
-<style>
+<style lang="scss">
+* {
+    user-select: none;
+}
+
 html {
-  background-color: #57bcc6;
-  font-size: 22px;
-  font-family: 'Amatic SC', cursive;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+    background-color: #57bcc6;
+    font-size: 22px;
+    font-family: 'Amatic SC', cursive;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-overflow-scrolling: auto;
+
+}
+
+body {
+  overflow: hidden;
+  -webkit-overflow-scrolling: auto;
 }
 
 .fullscreen {
-  position: relative;
-  z-index: 2;
+    position: absolute;
+    z-index: 2;
 }
 
 .game-wrap {
-  height: 100vh;
-  overflow:hidden;
-  position: absolute;
-  width: 100vw;
+    height: 85vh;
+    overflow: hidden;
+    position: absolute;
+    width: 100vw;
+    overflow: hidden;
 }
 
 *,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+*:after,
+*:before {
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #3b8070;
+    color: #3b8070;
+    text-decoration: none;
+    padding: 10px 30px;
 }
 
 .button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+    color: #fff;
+    background-color: #3b8070;
 }
 
 .button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #35495e;
+    color: #35495e;
+    text-decoration: none;
+    padding: 10px 30px;
+    margin-left: 15px;
 }
 
 .button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+    color: #fff;
+    background-color: #35495e;
 }
 </style>

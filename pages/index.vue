@@ -1,16 +1,13 @@
 <template>
 <section class="container">
-  <div>
-    <logo/>
-    <h1 class="title">
-        wap-games
-      </h1>
-    <h2 class="subtitle">
-        A bunch of games based on the hit podcast &#34;What Am Politics?&#34;
-      </h2>
-    <div class="links">
-      <button @click="enableFullscreen">START</button>
-    </div>
+  <div class="logo-wrap">
+    <img class="wap-logo" src="@/assets/wap-logo.png" />
+    <h2>Podcasting Triathlon</h2>
+  </div>
+  <div class="btn-wrap">
+    <UiButton class="start-btn">Start</UiButton>
+    <UiButton>Enable Fullscreen</UiButton>
+
   </div>
 </section>
 </template>
@@ -20,7 +17,10 @@ import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
-    Logo
+    Logo,
+    UiButton: () =>
+      import ('~/components/UiButton.vue')
+
   },
   methods: {
     enableFullscreen() {
@@ -36,6 +36,12 @@ export default {
         cancelFullScreen.call(doc);
       }
     }
+  },
+  mounted() {
+    this.$store.commit('players/setPlayerCharacter', {
+      player: 'a',
+      character: 'Steve'
+    });
   }
 }
 </script>
@@ -48,30 +54,28 @@ body {
 .container {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
   text-align: center;
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+.btn-wrap {
+  display: flex;
+  flex-direction: column;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.start-btn {
+  margin-bottom: 10px;
 }
 
-.links {
-  padding-top: 15px;
+.wap-logo {
+  max-width: 80%;
+}
+
+h2 {
+  color: white;
+  font-size: 13vw;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
 }
 </style>

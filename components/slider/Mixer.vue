@@ -1,6 +1,7 @@
 <template lang="html">
 <div class="mixer" :style="mixerStyles" @mousemove="trackMove" @touchmove="trackMove">
   <div class="knob" :style="knobStyles"/>
+  <div class="slider-slot" />
 </div>
 </template>
 
@@ -62,10 +63,8 @@ export default {
 
 <style lang="scss" scoped>
 .mixer {
-    background-color: #333;
-    border-radius: 10px;
     height: 150px;
-    width: 20px;
+    width: 80px;
     position: relative;
 }
 
@@ -80,6 +79,8 @@ export default {
     position: absolute;
     transform: translate(-50%, 50%);
     width: 80px;
+    z-index: 3;
+
 
     &:after {
       content: '';
@@ -89,7 +90,20 @@ export default {
       position: absolute;
       top: 5px;
       left: 20px;
-      background-color: rgba(255,255,255,0.5);
+      background-color: #faddb3;
     }
 }
+
+.slider-slot {
+  height: 100%;
+  width: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50;
+  background-color: #333;
+  border-radius: 10px;
+  transform: translateX(-50%);
+
+}
+
 </style>

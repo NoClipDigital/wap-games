@@ -1,20 +1,7 @@
 <template>
 <div class="slider-game">
 
-  <SliderResults @click.native="startGame" v-if="showResults" :scores="score" />
 
-  <div class="top-half half">
-    <levelbar :level="levelVal('a')" />
-    <mixer @change="setMixerVal" mixer-id="a" :reverse="true" />
-  </div>
-
-  <button class="start-btn" v-if="!playing" @click="startGame">Start</button>
-  <waveform class="waveform" @complete="triggerResults" @update="setAudioVal" ref="waveform" />
-
-  <div class="bottom-half half">
-    <levelbar :level="levelVal('b')" />
-    <mixer @change="setMixerVal" mixer-id="b" />
-  </div>
 
 </div>
 </template>
@@ -24,21 +11,7 @@ export default {
   name: "SliderGame",
   data() {
     return {
-      playing: false,
-      showResults: false,
-      mixerVal: {
-        a: 0,
-        b: 0
-      },
-      audioVal: 0,
-      score: {
-        a: 0,
-        b: 0
-      },
-      delta: {
-        a: 0,
-        b: 0
-      }
+
     }
   },
   components: {
