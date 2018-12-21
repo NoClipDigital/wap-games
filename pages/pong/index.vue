@@ -11,13 +11,14 @@ export default {
   name: "PongGame",
   components: {
     PongPaddle: () => import('~/components/pong/PongPaddle.vue'),
-    PongBall: () => import('~/components/pong/PongBall.vue')
+    PongBall: () => import('~/components/pong/PongBall.vue'),
+    PongResults: () => import('~/components/pong/PongResults.vue')
   },
   data() {
     return {
       paddles: {
-        a: 50,
-        b: 50
+        a: 0.5,
+        b: 0.5
       }
     }
   },
@@ -30,9 +31,9 @@ export default {
     },
     recordScore({position}) {
       if (position.y <= 0) {
-        console.log("Point for Player A!");
-      } else if (position.y >= 1) {
         console.log("Point for Player B!");
+      } else if (position.y >= 1) {
+        console.log("Point for Player A!");
       }
     },
   }

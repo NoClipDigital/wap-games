@@ -21,7 +21,7 @@ export default {
     },
     paddlePosition: {
       type: Number,
-      default: 50,
+      default: 0.5,
     }
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
       let xCoord = x - offsetX;
 
       // Convert pixel to percentage
-      xCoord = (xCoord / this.screenWidth) * 100;
+      xCoord = (xCoord / this.screenWidth);
       this.$emit('change', {
         id: this.paddleId,
         val: xCoord
@@ -45,7 +45,7 @@ export default {
   computed: {
     paddleStyles() {
       return {
-        left: this.paddlePosition + '%'
+        left: this.paddlePosition * 100 + '%'
       }
     }
   },
