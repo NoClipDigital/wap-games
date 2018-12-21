@@ -5,7 +5,9 @@
     <h2>Podcasting Triathlon</h2>
   </div>
   <div class="btn-wrap">
+    <nuxt-link to="/character-selection">
     <UiButton class="start-btn">Start</UiButton>
+    </nuxt-link>
     <UiButton>Enable Fullscreen</UiButton>
 
   </div>
@@ -38,10 +40,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit('players/setPlayerCharacter', {
-      player: 'a',
-      character: 'Steve'
-    });
+    
   }
 }
 </script>
@@ -74,8 +73,7 @@ body {
 }
 
 h2 {
-  color: white;
-  font-size: 13vw;
-  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+  text-transform: capitalize;
 }
+
 </style>

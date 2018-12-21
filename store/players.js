@@ -5,7 +5,7 @@ export const state = () => ({
     character: undefined
   },
   b: {
-    character: 'Richie'
+    character: undefined
   }
 });
 
@@ -14,6 +14,11 @@ export const mutations = {
     player,
     character
   }) {
+    let altKey = player == 'a' ? 'b' : 'a';
+    let altChar = character == 'richie' ? 'steve' : 'richie';
+
     Vue.set(state[player], 'character', character);
+    Vue.set(state[altKey], 'character', altChar);
+
   }
 };

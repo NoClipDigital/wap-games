@@ -63,6 +63,12 @@ html {
 
 }
 
+h2 {
+  color: white;
+  font-size: 13vw;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
 body {
   overflow: hidden;
   -webkit-overflow-scrolling: auto;
