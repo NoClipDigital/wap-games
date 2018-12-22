@@ -63,8 +63,8 @@ export default {
         this.velocity.x *= -1;
       };
       // Paddle interaction bounce logic
-      let iHitPaddle = ((newPositiony <= this.paddleY.a && newPositiony >= this.paddleY.a - 0.01) && (newPositionx > this.paddles.a - 0.17 && newPositionx < this.paddles.a + 0.17)) ||
-        ((newPositiony > this.paddleY.b && newPositiony < this.paddleY.b + 0.01) && (newPositionx > this.paddles.b - 0.17 && newPositionx < this.paddles.b + 0.17));
+      let iHitPaddle = ((newPositiony <= this.paddleY.a && newPositiony >= this.paddleY.a - 0.04) && (newPositionx > this.paddles.a - 0.17 && newPositionx < this.paddles.a + 0.17)) ||
+        ((newPositiony > this.paddleY.b && newPositiony < this.paddleY.b + 0.04) && (newPositionx > this.paddles.b - 0.17 && newPositionx < this.paddles.b + 0.17));
 
       if (iHitPaddle && newPositiony <= this.paddleY.a) {
         newPositiony = this.paddleY.a;
@@ -81,7 +81,6 @@ export default {
       };
 
       //  Check if the ball is off the screen and tell my Mom.
-
       if (this.position.y >= this.wall.top || this.position.y <= this.wall.bottom) {
         this.$emit('score', {
           position: this.position
