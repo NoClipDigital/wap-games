@@ -1,11 +1,15 @@
 <template>
 <div class="game-wrap" :style="{height: windowHeight + 'px'}">
-  <button class="fullscreen" @click="enableFullscreen">Fullscreen</button>
+  <button class="fullscreen" @click="enterFullscreen">Fullscreen</button>
   <nuxt/>
 </div>
 </template>
 
 <script>
+import {
+  enableFullscreen
+} from '@/assets/js/fullscreen.js'
+
 export default {
   data() {
     return {
@@ -13,18 +17,8 @@ export default {
     }
   },
   methods: {
-    enableFullscreen() {
-      var doc = window.document;
-      var docEl = doc.documentElement;
-
-      var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-      var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-      if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-        requestFullScreen.call(docEl);
-      } else {
-        cancelFullScreen.call(doc);
-      }
+    enterFullscreen() {
+      enableFullscreen();
     }
   },
   mounted() {
@@ -32,6 +26,12 @@ export default {
     document.ontouchmove = (e) => {
       e.preventDefault();
     }
+
+    document.addEventListener('touchmove', function(event) {
+      if (event.scale !== 1) {
+        event.preventDefault();
+      }
+    }, false);
 
     setInterval(() => {
       this.windowHeight = window.innerHeight
@@ -64,14 +64,14 @@ html {
 }
 
 h2 {
-  color: white;
-  font-size: 13vw;
-  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-size: 13vw;
+    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 body {
-  overflow: hidden;
-  -webkit-overflow-scrolling: auto;
+    overflow: hidden;
+    -webkit-overflow-scrolling: auto;
 }
 
 .fullscreen {

@@ -12,7 +12,7 @@
     font-size: 30px;
     font-weight: bold;
     position: relative;
-    width: 200px;
+    width: 250px;
 
     &:active {
         background-color: #faddb3;

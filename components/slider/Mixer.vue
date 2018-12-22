@@ -29,7 +29,7 @@ export default {
     },
     knobStyles() {
       return {
-        bottom: 100 * this.sliderVal + '%'
+        bottom: (90 * this.sliderVal) + 5 + '%'
       }
     }
   },

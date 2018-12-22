@@ -6,9 +6,9 @@
   </div>
   <div class="btn-wrap">
     <nuxt-link to="/character-selection">
-    <UiButton class="start-btn">Start</UiButton>
+      <UiButton class="start-btn">Start</UiButton>
     </nuxt-link>
-    <UiButton>Enable Fullscreen</UiButton>
+    <UiButton @click.native="enterFullscreen">Enable Fullscreen</UiButton>
 
   </div>
 </section>
@@ -16,6 +16,9 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import {
+  enableFullscreen
+} from '@/assets/js/fullscreen.js'
 
 export default {
   components: {
@@ -25,22 +28,13 @@ export default {
 
   },
   methods: {
-    enableFullscreen() {
-      var doc = window.document;
-      var docEl = doc.documentElement;
-
-      var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-      var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-      if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-        requestFullScreen.call(docEl);
-      } else {
-        cancelFullScreen.call(doc);
-      }
+    enterFullscreen() {
+      enableFullscreen();
     }
+
   },
   mounted() {
-    
+
   }
 }
 </script>
@@ -75,5 +69,4 @@ body {
 h2 {
   text-transform: capitalize;
 }
-
 </style>
