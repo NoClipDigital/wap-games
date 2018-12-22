@@ -65,8 +65,12 @@ html {
 
 h2 {
     color: white;
-    font-size: 13vw;
+    font-size: 50px;
     text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 600px) {
+      font-size: 13vw;
+    }
 }
 
 body {
@@ -84,7 +88,11 @@ body {
     overflow: hidden;
     position: absolute;
     width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
     overflow: hidden;
+    max-width: 60vh;
+
 }
 
 *,

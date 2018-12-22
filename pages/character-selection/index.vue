@@ -1,6 +1,6 @@
 <template>
 <div class="character-selection">
-  <nuxt-link v-if="players.b.character" to="/slider">
+  <nuxt-link v-if="players.b.character" to="/game-selection">
     <UiButton class="start-btn">Let's Go!</UiButton>
   </nuxt-link>
 
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "SliderGame",
+  name: "CharacterSelect",
   data() {
     return {
 
