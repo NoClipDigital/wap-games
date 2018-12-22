@@ -1,12 +1,12 @@
 <template lang="html">
 <div class="pong-results">
   <div class="top-results result-half">
-    <span class="score">Accuracy: {{Math.round(100 - scores.a)}}%</span>
+    <span class="score">Score: {{scores.a}}</span>
     <span class="win-lose" v-if="aWins">You win!</span>
     <span class="win-lose" v-else>You lose...</span>
   </div>
   <div class="bottom-results result-half">
-    <span class="score">Accuracy: {{Math.round(100 - scores.b)}}%</span>
+    <span class="score">Score: {{scores.b}}</span>
     <span class="win-lose" v-if="!aWins">You win!</span>
     <span class="win-lose" v-else>You lose...</span>
   </div>
@@ -68,7 +68,7 @@ export default {
 }
 
 .win-lose {
-  color: #f9bf62;
+    color: #f9bf62;
     font-size: 10vh;
     font-weight: bold;
 }

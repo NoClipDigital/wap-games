@@ -1,7 +1,8 @@
 <template>
 <div class="pong-game">
+  <PongResults @click.native="startGame" v-if="showResults" :scores="scores" />
   <PongPaddle :paddlePosition="paddles.a" paddle-id="a" class="playerA" @change="setPaddlePosition" />
-  <PongBall :paddles="paddles" @score="recordScore"/>
+  <PongBall :paddles="paddles" @score="recordScore" :playing="playing" />
   <PongPaddle :paddlePosition="paddles.b" paddle-id="b" class="playerB" @change="setPaddlePosition" />
 </div>
 </template>
@@ -16,26 +17,47 @@ export default {
   },
   data() {
     return {
+      playing: true,
+      showResults: false,
       paddles: {
         a: 0.5,
         b: 0.5
+      },
+      scores: {
+        a: 0,
+        b: 0
       }
     }
   },
   methods: {
+    startGame() {
+      this.playing = true;
+      this.showResults = false;
+    },
+    // triggerResults is a computed for this game.
     setPaddlePosition({
       id,
       val
     }) {
       this.paddles[id] = val;
     },
-    recordScore({position}) {
+    recordScore({
+      position
+    }) {
       if (position.y <= 0) {
-        console.log("Point for Player B!");
+        this.scores.b += 1;
       } else if (position.y >= 1) {
-        console.log("Point for Player A!");
+        this.scores.a += 1;
       }
     },
+  },
+  computed: {
+    triggerResults() {
+      if (this.scores.a >= 10 || this.scores.b >= 10) {
+        this.playing = false;
+        this.showResults = true;
+      }
+    }
   }
 }
 </script>

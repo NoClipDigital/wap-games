@@ -1,5 +1,5 @@
 <template lang="html">
-<div class="ball" :style="ballStyles">
+<div v-if="playing" class="ball" :style="ballStyles">
 </div>
 
 </template>
@@ -34,6 +34,7 @@ export default {
     }
   },
   props: {
+    playing: true,
     paddles: {
       type: Object,
       default: function() {
@@ -88,6 +89,10 @@ export default {
         this.resetBall();
       };
 
+      if (!this.playing) {
+        this.gameOver = true;
+      }
+
       if (!this.gameOver) {
         this.position.x = newPositionx;
         this.position.y = newPositiony;
@@ -127,7 +132,7 @@ export default {
   },
   mounted() {
     this.resetBall();
-    window.requestAnimationFrame(this.step);
+    this.request = window.requestAnimationFrame(this.step);
   }
 }
 </script>
