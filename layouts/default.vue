@@ -56,7 +56,6 @@ export default {
 }
 
 html {
-    background-color: #57bcc6;
     font-size: 22px;
     font-family: 'Amatic SC', cursive;
     word-spacing: 1px;
@@ -106,6 +105,7 @@ body {
     transform: translateX(-50%);
     overflow: hidden;
     max-width: 60vh;
+    background-color: #57bcc6;
 
 }
 

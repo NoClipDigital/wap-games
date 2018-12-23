@@ -76,6 +76,10 @@ export default {
 <style lang="scss" scoped>
 h2 {
     color: white;
+
+    @media (max-width: 600px) {
+      font-size: 11vw;
+    }
 }
 
 .half {
@@ -108,7 +112,7 @@ h2 {
 .score-banner {
     box-shadow: 1px 1px 10px rgba(0,0,0,0.4);
     position: absolute;
-    height: 10vh;
+    height: 8vh;
     top: 50%;
     transform:translateY(-50%);
     background-color: #f9bf62;
@@ -118,7 +122,7 @@ h2 {
     justify-content: space-evenly;
 
     img {
-        height: 8vh;
+        height: 6vh;
         display: inline-block;
     }
 }
