@@ -1,3 +1,4 @@
+import Vue from 'vue'
 export const enableFullscreen = () => {
   var doc = window.document;
   var docEl = doc.documentElement;

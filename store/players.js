@@ -2,10 +2,12 @@ import Vue from 'vue'
 
 export const state = () => ({
   a: {
-    character: undefined
+    character: 'richie',
+    score: 0
   },
   b: {
-    character: undefined
+    character: 'steve',
+    score: 0
   }
 });
 
@@ -19,6 +21,9 @@ export const mutations = {
 
     Vue.set(state[player], 'character', character);
     Vue.set(state[altKey], 'character', altChar);
+  },
 
+  addScore(state, player) {
+    state[player].score++;
   }
 };

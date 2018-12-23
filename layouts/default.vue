@@ -1,6 +1,6 @@
 <template>
 <div class="game-wrap" :style="{height: windowHeight + 'px'}">
-  <button class="fullscreen" @click="enterFullscreen">Fullscreen</button>
+  <!-- <button class="fullscreen" v-if="!isIOS" @click="enterFullscreen"></button> -->
   <nuxt/>
 </div>
 </template>
@@ -10,10 +10,14 @@ import {
   enableFullscreen
 } from '@/assets/js/fullscreen.js'
 
+import { isIOS } from 'mobile-device-detect';
+
+
 export default {
   data() {
     return {
-      windowHeight: 0
+      windowHeight: 0,
+      isIOS: isIOS
     }
   },
   methods: {
@@ -21,13 +25,16 @@ export default {
       enableFullscreen();
     }
   },
+
   mounted() {
+
     // Disable scrolling.
     document.ontouchmove = (e) => {
-      e.preventDefault();
     }
 
     document.addEventListener('touchmove', function(event) {
+      // event.preventDefault();
+      //
       if (event.scale !== 1) {
         event.preventDefault();
       }
@@ -81,6 +88,13 @@ body {
 .fullscreen {
     position: absolute;
     z-index: 2;
+    width: 30px;
+    height: 30px;
+    background-image: url(~assets/fullscreen.svg);
+    background-size: cover;
+    background-color: transparent;
+    border: 0;
+    padding: 0
 }
 
 .game-wrap {
