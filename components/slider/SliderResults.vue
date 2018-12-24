@@ -11,6 +11,13 @@
     <span class="win-lose" v-else>You lose...</span>
   </div>
 
+  <div class="banner">
+    <div class="winner-message">
+        <img :src="playerImg(winner.letter)" />
+        <h2>{{winner.message}}</h2>
+    </div>
+  </div>
+
 </div>
 </template>
 
@@ -19,21 +26,32 @@ import anime from 'animejs'
 
 export default {
   name: "SliderResults",
-  data() {
-    return {
 
+  methods: {
+    playerImg(letter) {
+      return require(`@/assets/${this.players[letter].character}.png`);
     }
   },
-
 
   computed: {
     aWins() {
       return this.scores.a <= this.scores.b;
+    },
+    players() {
+      return this.$store.state.players
+    },
+    winner() {
+      let letter = this.aWins ? 'a' : 'b';
+      return {
+        letter,
+        message: this.players[letter].character + ' wins!'
+      }
     }
   },
   mounted() {
-
+    this.$store.commit('players/addScore', this.winner.letter);
   },
+
   props: {
     scores: Object
   },
@@ -81,4 +99,32 @@ export default {
 .bottom-results {
     bottom: 0;
 }
+
+
+.banner {
+    background-color: #f9bf62;
+    position: absolute;
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.winner-message {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+
+  img {
+    height: 8vh;
+    display: inline-block;
+  }
+}
+
 </style>

@@ -32,7 +32,7 @@ export default {
     document.ontouchmove = (e) => {
     }
 
-    document.addEventListener('touchmove', function(event) {
+    window.addEventListener('touchmove', function(event) {
       // event.preventDefault();
       //
       if (event.scale !== 1) {

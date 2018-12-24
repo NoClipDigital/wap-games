@@ -1,7 +1,9 @@
 <template>
 <div class="slider-game">
 
-  <SliderResults @click.native="startGame" v-if="showResults" :scores="score" />
+  <SliderResults v-if="showResults" :scores="score" />
+
+
 
   <div class="top-half half">
     <levelbar :level="levelVal('a')" />
@@ -55,6 +57,7 @@ export default {
 
   },
   methods: {
+
     levelVal(id) {
       // let difficulty = 0.1;
       // let multiplier = (this.mixerVal[id]) + (0.5 * (1 - difficulty));
@@ -84,8 +87,10 @@ export default {
       }, 10);
     },
     triggerResults() {
-      this.playing = false;
       this.showResults = true;
+      setTimeout(() => {
+        this.$router.push('/game-selection')
+      }, 3000);
     },
     setMixerVal({
       val,
@@ -99,9 +104,6 @@ export default {
       this.setScore('b');
     },
     setScore(id) {
-      // this.delta[id] = (Math.abs(this.audioVal - (1 - this.mixerVal[id])));
-      // this.score[id] += this.delta[id];
-
       this.delta[id] = Math.abs(this.levelVal(id) - 0.5);
       this.score[id] += this.delta[id];
 
@@ -120,12 +122,12 @@ export default {
 }
 
 .start-btn {
-  background-color: #f9bf62;
-  border: 5px solid #333;
-  font-family: 'Amatic SC', cursive;
-  font-size: 30px;
-  font-weight: bold;
-  left: 50%;
+    background-color: #f9bf62;
+    border: 5px solid #333;
+    font-family: 'Amatic SC', cursive;
+    font-size: 30px;
+    font-weight: bold;
+    left: 50%;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -133,11 +135,9 @@ export default {
     width: 200px;
 
     &:active {
-      background-color: #faddb3;
+        background-color: #faddb3;
     }
 }
-
-
 
 .half {
     display: flex;

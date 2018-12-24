@@ -4,6 +4,8 @@
   <PongPaddle :paddlePosition="paddles.a" paddle-id="a" class="playerA" @change="setPaddlePosition" />
   <PongBall :paddles="paddles" @score="recordScore" :playing="playing" />
   <PongPaddle :paddlePosition="paddles.b" paddle-id="b" class="playerB" @change="setPaddlePosition" />
+
+  <h2 class="scores">{{scores.a}} : {{scores.b}}</h2>
 </div>
 </template>
 
@@ -11,9 +13,12 @@
 export default {
   name: "PongGame",
   components: {
-    PongPaddle: () => import('~/components/pong/PongPaddle.vue'),
-    PongBall: () => import('~/components/pong/PongBall.vue'),
-    PongResults: () => import('~/components/pong/PongResults.vue')
+    PongPaddle: () =>
+      import ('~/components/pong/PongPaddle.vue'),
+    PongBall: () =>
+      import ('~/components/pong/PongBall.vue'),
+    PongResults: () =>
+      import ('~/components/pong/PongResults.vue')
   },
   data() {
     return {
@@ -49,15 +54,29 @@ export default {
       } else if (position.y >= 1) {
         this.scores.a += 1;
       }
+
+      this.checkScore();
     },
-  },
-  computed: {
-    triggerResults() {
+
+    checkScore() {
       if (this.scores.a >= 10 || this.scores.b >= 10) {
         this.playing = false;
         this.showResults = true;
+
+        this.$store.commit('players/addScore', this.winner);
+
+        setTimeout(() => {
+          this.$router.push('/game-selection');
+        }, 2000);
+
       }
     }
+  },
+  computed: {
+    winner() {
+      return this.scores.a > this.scores.b ? 'a' : 'b';
+    },
+
   }
 }
 </script>
@@ -65,6 +84,13 @@ export default {
 <style>
 body {
   background-color: white;
+}
+
+.scores {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .playerA {

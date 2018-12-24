@@ -28,7 +28,7 @@ export default {
 
   computed: {
     aWins() {
-      return this.scores.a <= this.scores.b;
+      return this.scores.a > this.scores.b;
     }
   },
   mounted() {

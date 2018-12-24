@@ -279,6 +279,11 @@ export default {
         opacity: 0.2;
         pointer-events: none;
     }
+
+    .gameover & {
+        opacity: 0.2;
+        pointer-events: none;
+    }
 }
 
 .top-half {
