@@ -1,8 +1,13 @@
 <template>
 <div class="pong-game">
+
+  <Instructions v-if="!playing && !showResults" @start="startGame">
+    <p>You'll figure it out...</p>
+  </Instructions>
+
   <PongResults @click.native="startGame" v-if="showResults" :scores="scores" />
   <PongPaddle :paddlePosition="paddles.a" paddle-id="a" class="playerA" @change="setPaddlePosition" />
-  <PongBall :paddles="paddles" @score="recordScore" :playing="playing" />
+  <PongBall v-if="playing" :paddles="paddles" @score="recordScore" :playing="playing" />
   <PongPaddle :paddlePosition="paddles.b" paddle-id="b" class="playerB" @change="setPaddlePosition" />
 
   <h2 class="scores">{{scores.a}} : {{scores.b}}</h2>
@@ -18,11 +23,13 @@ export default {
     PongBall: () =>
       import ('~/components/pong/PongBall.vue'),
     PongResults: () =>
-      import ('~/components/pong/PongResults.vue')
+      import ('~/components/pong/PongResults.vue'),
+    Instructions: () =>
+      import ('~/components/Instructions.vue')
   },
   data() {
     return {
-      playing: true,
+      playing: false,
       showResults: false,
       paddles: {
         a: 0.5,
@@ -59,7 +66,7 @@ export default {
     },
 
     checkScore() {
-      if (this.scores.a >= 10 || this.scores.b >= 10) {
+      if (this.scores.a >= 5 || this.scores.b >= 5) {
         this.playing = false;
         this.showResults = true;
 
@@ -84,6 +91,12 @@ export default {
 <style>
 body {
   background-color: white;
+}
+
+.pong-game {
+  height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 .scores {

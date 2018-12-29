@@ -1,5 +1,5 @@
 <template lang="html">
-<div v-if="playing" class="ball" :style="ballStyles">
+<div class="ball" :style="ballStyles">
 </div>
 
 </template>
@@ -34,7 +34,7 @@ export default {
     }
   },
   props: {
-    playing: true,
+    playing: false,
     paddles: {
       type: Object,
       default: function() {
@@ -56,11 +56,11 @@ export default {
       // If ball hits long walls, change direction.
       if (newPositionx >= this.wall.right) {
         newPositionx = this.wall.right;
-        this.velocity.x *= -1;
+        this.velocity.x *= -1.1;
       };
       if (newPositionx <= this.wall.left) {
         newPositionx <= this.wall.left;
-        this.velocity.x *= -1;
+        this.velocity.x *= -1.1;
       };
       // Paddle interaction bounce logic
       let iHitPaddle = ((newPositiony <= this.paddleY.a && newPositiony >= this.paddleY.a - 0.04) && (newPositionx > this.paddles.a - 0.17 && newPositionx < this.paddles.a + 0.17)) ||
@@ -71,6 +71,7 @@ export default {
         let sign = Math.sign(this.velocity.y);
         let value = Math.abs(this.velocity.y) + 0.001;
         this.velocity.y = -1 * value * sign;
+
       };
 
       if (iHitPaddle && newPositiony >= this.paddleY.b) {
@@ -121,7 +122,7 @@ export default {
   computed: {
     ballStyles() {
       let left = this.position.x * 100 + 'vw';
-      let top = this.position.y * 100 + 'vh';
+      let top = window.innerHeight * this.position.y + 'px';
 
       return {
         left,

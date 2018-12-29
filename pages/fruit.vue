@@ -1,9 +1,11 @@
 <template>
 <div class="fruit-game" :class="gameState">
 
+  <Instructions v-if="gameState == 'instructions'" @start="startRound">You've gotta be the first one to grab that sweet, sweet low hanging fruit.</Instructions>
+
   <div class="top-half half">
     <div class="vine-wrap">
-      <div class="fruit" @click="selectFruit('a', i)" :style="fruitStyles(fruit)" v-for="(fruit, i) of fruits" />
+      <div class="fruit" @touchstart="selectFruit('a', i)" :style="fruitStyles(fruit)" v-for="(fruit, i) of fruits" />
       <div class="vine-wrap">
         <div class="vine" :style="vineStyles(i)" v-for="i of 3" />
       </div>
@@ -31,7 +33,7 @@
 
   </div>
   <div class="bottom-half half">
-    <div class="fruit" @click="selectFruit('b', i)" :style="fruitStyles(fruit)" v-for="(fruit, i) of fruits" />
+    <div class="fruit" @touchstart="selectFruit('b', i)" :style="fruitStyles(fruit)" v-for="(fruit, i) of fruits" />
 
     <div class="vine-wrap">
       <div class="vine" :style="vineStyles(i)" v-for="i of 3" />
@@ -45,7 +47,8 @@
 export default {
   name: "FruitGame",
   components: {
-
+    Instructions: () =>
+      import ('~/components/Instructions.vue')
   },
   data() {
     return {
@@ -54,7 +57,7 @@ export default {
         b: 0
       },
       maxScore: 3,
-      gameState: 'scores',
+      gameState: 'instructions',
       lowestFruit: undefined,
       fruitCount: 5,
       objects: [{
@@ -208,10 +211,6 @@ export default {
       }
 
     }
-  },
-
-  mounted() {
-    this.startRound();
   }
 }
 </script>

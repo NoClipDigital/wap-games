@@ -1,16 +1,18 @@
 <template>
 <div class="slider-game">
 
+  <Instructions v-if="!playing" @start="startGame">
+    <p>What does Richie love more than anything on this earth? Easy. A nice hot audio signal that never peaks.</p>
+    <p>Try to keep the audio levels as close to the centre as possible.</p>
+  </Instructions>
+
   <SliderResults v-if="showResults" :scores="score" />
-
-
 
   <div class="top-half half">
     <levelbar :level="levelVal('a')" />
     <mixer @change="setMixerVal" mixer-id="a" :reverse="true" />
   </div>
 
-  <button class="start-btn" v-if="!playing" @click="startGame">Start</button>
   <waveform class="waveform" @complete="triggerResults" @update="setAudioVal" ref="waveform" />
 
   <div class="bottom-half half">
@@ -26,6 +28,7 @@ export default {
   name: "SliderGame",
   data() {
     return {
+
       playing: false,
       showResults: false,
       mixerVal: {
@@ -51,7 +54,10 @@ export default {
     Mixer: () =>
       import ('~/components/slider/Mixer.vue'),
     SliderResults: () =>
-      import ('~/components/slider/SliderResults.vue')
+      import ('~/components/slider/SliderResults.vue'),
+    Instructions: () =>
+      import ('~/components/Instructions.vue')
+
   },
   computed: {
 

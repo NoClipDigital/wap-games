@@ -4,7 +4,6 @@
 
   <div class="top-half half">
     <h2>Select a game:</h2>
-    <div class="btn-wrap">
       <nuxt-link to="pong">
         <UiButton class="game-btn">Podcast Pong</UiButton>
       </nuxt-link>
@@ -14,7 +13,6 @@
       <nuxt-link to="fruit">
         <UiButton class="game-btn">Low Hanging Fruit</UiButton>
       </nuxt-link>
-    </div>
   </div>
 
   <div class="score-banner">
@@ -27,22 +25,19 @@
       <img :src="playerImg('a')" />
       <h2>{{players.a.score}}</h2>
     </div>
-
   </div>
 
   <div class="bottom-half half">
     <h2>Select a game:</h2>
-    <div class="btn-wrap">
-      <nuxt-link to="pong">
-        <UiButton class="game-btn">Podcast Pong</UiButton>
-      </nuxt-link>
-      <nuxt-link to="slider">
-        <UiButton class="game-btn">Slider Rider</UiButton>
-      </nuxt-link>
-      <nuxt-link to="fruit">
-        <UiButton class="game-btn">Low Hanging Fruit</UiButton>
-      </nuxt-link>
-    </div>
+    <nuxt-link to="pong">
+      <UiButton class="game-btn">Podcast Pong</UiButton>
+    </nuxt-link>
+    <nuxt-link to="slider">
+      <UiButton class="game-btn">Slider Rider</UiButton>
+    </nuxt-link>
+    <nuxt-link to="fruit">
+      <UiButton class="game-btn">Low Hanging Fruit</UiButton>
+    </nuxt-link>
   </div>
 
 </div>
@@ -78,18 +73,20 @@ h2 {
     color: white;
 
     @media (max-width: 600px) {
-      font-size: 11vw;
+        font-size: 11vw;
     }
 }
 
 .half {
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     display: flex;
     flex-direction: column;
     height: 50%;
     position: absolute;
     width: 100%;
+    padding-top: 10%;
+    padding-bottom: 5%;
 }
 
 .top-half {
@@ -101,7 +98,6 @@ h2 {
 }
 
 .game-btn {
-    margin-bottom: 10px;
 }
 
 .btn-wrap {
@@ -114,7 +110,7 @@ h2 {
     position: absolute;
     height: 8vh;
     top: 50%;
-    transform:translateY(-50%);
+    transform: translateY(-50%);
     background-color: #f9bf62;
     width: 100%;
     display: flex;
@@ -128,7 +124,7 @@ h2 {
 }
 
 .player-scores {
-  align-items: center;
+    align-items: center;
     display: flex;
     width: 20vh;
     justify-content: space-around;

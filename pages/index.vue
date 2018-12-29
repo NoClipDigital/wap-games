@@ -15,12 +15,19 @@
 </template>
 
 <script>
+import { isIOS } from 'mobile-device-detect';
+
 import Logo from '~/components/Logo.vue'
 import {
   enableFullscreen
 } from '@/assets/js/fullscreen.js'
 
 export default {
+  data() {
+    return {
+      isIOS: isIOS
+    }
+  },
   components: {
     Logo,
     UiButton: () =>

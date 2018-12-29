@@ -1,5 +1,6 @@
 <template lang="html">
 <div class="slider-results">
+
   <div class="top-results result-half">
     <span class="score">Accuracy: {{Math.round(100 - scores.a)}}%</span>
     <span class="win-lose" v-if="aWins">You win!</span>
@@ -31,6 +32,10 @@ export default {
     playerImg(letter) {
       return require(`@/assets/${this.players[letter].character}.png`);
     }
+  },
+
+  components: {
+
   },
 
   computed: {
