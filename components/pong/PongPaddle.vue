@@ -40,6 +40,8 @@ export default {
         id: this.paddleId,
         val: xCoord
       });
+
+      e.preventDefault();
     }
   },
   computed: {

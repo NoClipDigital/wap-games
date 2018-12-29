@@ -111,7 +111,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
-    max-width: 60vh;
+    max-width: 70vh;
     background-color: #57bcc6;
 
 }

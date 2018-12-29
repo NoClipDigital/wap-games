@@ -52,6 +52,8 @@ export default {
       }else {
         this.sliderVal = 1 - (limitedVal / this.mixerHeight);
       }
+
+      e.preventDefault();
     }
   },
   props: {
