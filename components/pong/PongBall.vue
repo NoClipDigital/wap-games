@@ -12,6 +12,7 @@ export default {
   data() {
     return {
       gameOver: false,
+      maxXVelocity: 0.03,
       position: {
         x: 0.3,
         y: 0.5
@@ -62,23 +63,27 @@ export default {
         newPositionx <= this.wall.left;
         this.velocity.x *= -1.1;
       };
+
+      if(this.velocity.x > this.maxXVelocity) {
+        this.velocity.x = this.maxXVelocity;
+      }else if(this.velocity.x < this.maxXVelocity * -1) {
+        this.velocity.x = this.maxXVelocity * -1;
+      }
+
       // Paddle interaction bounce logic
       let iHitPaddle = ((newPositiony <= this.paddleY.a && newPositiony >= this.paddleY.a - 0.04) && (newPositionx > this.paddles.a - 0.17 && newPositionx < this.paddles.a + 0.17)) ||
         ((newPositiony > this.paddleY.b && newPositiony < this.paddleY.b + 0.04) && (newPositionx > this.paddles.b - 0.17 && newPositionx < this.paddles.b + 0.17));
 
       if (iHitPaddle && newPositiony <= this.paddleY.a) {
         newPositiony = this.paddleY.a;
-        let sign = Math.sign(this.velocity.y);
-        let value = Math.abs(this.velocity.y) + 0.001;
-        this.velocity.y = -1 * value * sign;
-
+        this.velocity.y *= -1.1;
+        this.$emit('bounce', 'a');
       };
 
       if (iHitPaddle && newPositiony >= this.paddleY.b) {
         newPositiony = this.paddleY.b;
-        let sign = Math.sign(this.velocity.y);
-        let value = Math.abs(this.velocity.y) + 0.001;
-        this.velocity.y = -1 * value * sign;
+        this.velocity.y *= -1.1;
+        this.$emit('bounce', 'b');
       };
 
       //  Check if the ball is off the screen and tell my Mom.
