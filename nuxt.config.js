@@ -1,3 +1,6 @@
+var config = require('config');
+const projectVars = config.get('Config');
+
 const pkg = require('./package')
 
 module.exports = {
@@ -53,7 +56,7 @@ module.exports = {
   plugins: [],
 
   router: {
-    base: '/wap-games/'
+    base: projectVars.BuildPath
   },
 
 
@@ -69,7 +72,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    publicPath: 'http://gercarney.com/wap-games/',
+    publicPath: projectVars.PublicPath,
     extend(config, ctx) {
 
     }

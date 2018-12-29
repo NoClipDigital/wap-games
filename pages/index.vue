@@ -8,7 +8,7 @@
     <nuxt-link to="/character-selection">
       <UiButton class="start-btn">Start</UiButton>
     </nuxt-link>
-    <UiButton @click.native="enterFullscreen">Enable Fullscreen</UiButton>
+    <UiButton v-if="!isIOS" @click.native="enterFullscreen">Enable Fullscreen</UiButton>
 
   </div>
 </section>

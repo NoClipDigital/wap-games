@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "animejs": "^2.2.0",
+    "config": "^3.0.1",
     "cross-env": "^5.2.0",
     "mobile-detect": "^1.4.3",
     "mobile-device-detect": "^0.2.3",
