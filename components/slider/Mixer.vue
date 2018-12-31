@@ -36,8 +36,6 @@ export default {
   methods: {
     trackMove(e) {
 
-
-
       let y = e.targetTouches ? e.targetTouches[0].clientY : e.clientY;
       const rect = e.target.getBoundingClientRect();
 

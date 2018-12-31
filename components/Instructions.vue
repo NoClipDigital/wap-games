@@ -49,7 +49,7 @@ export default {
     align-items: center;
     justify-content: space-evenly;
     font-weight: bold;
-    padding: 10%;
+    padding: 10% 5%;
     text-align: center;
 }
 

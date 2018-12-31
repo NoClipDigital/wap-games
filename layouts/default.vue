@@ -1,5 +1,5 @@
 <template>
-<div class="game-wrap" :style="{height: windowHeight + 'px'}">
+<div class="game-wrap" @touchmove="handleTouch" :style="{height: windowHeight + 'px'}">
   <nuxt/>
 </div>
 </template>
@@ -24,20 +24,13 @@ export default {
   methods: {
     enterFullscreen() {
       enableFullscreen();
+    },
+    handleTouch(e) {
+      e.preventDefault();
     }
   },
 
   mounted() {
-
-    window.addEventListener('touchmove', function(event) {
-
-      if (event.scale && event.scale !== 1) {
-        event.preventDefault();
-      }
-
-
-    }, false);
-
     setInterval(() => {
       this.windowHeight = window.innerHeight
     }, 1000);

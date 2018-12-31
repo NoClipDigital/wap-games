@@ -1,7 +1,10 @@
 <template>
 <div class="fruit-game" :class="gameState">
 
-  <Instructions v-if="gameState == 'instructions'" @start="startRound">You've gotta be the first one to grab that sweet, sweet low hanging fruit.</Instructions>
+  <Instructions v-if="gameState == 'instructions'" @start="startRound">
+    <p>Richie and Steve are the masters at grabbing the sweetest of fruits... Those closest to the ground.</p>
+    <p>Be the first to grab the low hanging fruit and you win!</p>
+    </Instructions>
 
   <div class="top-half half">
     <div class="vine-wrap">

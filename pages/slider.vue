@@ -2,8 +2,9 @@
 <div class="slider-game">
 
   <Instructions v-if="!playing" @start="startGame">
-    <p>What does Richie love more than anything on this earth? Easy. A nice hot audio signal that never peaks.</p>
-    <p>Try to keep the audio levels as close to the centre as possible.</p>
+    <p>What does Richie love more than anything on this earth?</p>
+    <p>Easy. A nice hot audio signal that never peaks.</p>
+    <p>Use the slider to keep the audio levels as close to the centre as possible.</p>
   </Instructions>
 
   <SliderResults v-if="showResults" :scores="score" />

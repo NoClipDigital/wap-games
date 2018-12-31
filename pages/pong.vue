@@ -2,6 +2,8 @@
 <div class="pong-game">
 
   <Instructions v-if="!playing && !showResults" @start="startGame">
+    <p>The cornerstone of any good podcast is the witty back-and-forth between the co-hosts.</p>
+    <p>Get it? Back-and-forth? Like pong?</p>
     <p>You'll figure it out...</p>
   </Instructions>
 
