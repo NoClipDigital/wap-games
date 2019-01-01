@@ -1,8 +1,8 @@
 {
   "name": "wap-games",
   "version": "1.0.0",
-  "description": "A bunch of games based on the hit podcast &#34;What Am Politics?&#34;",
-  "author": "Ger Carney",
+  "description": "A collection of minigames based on the hit podcast &#34;What Am Politics?&#34;",
+  "author": "Ger Carney & Cian Markey",
   "private": true,
   "scripts": {
     "dev": "HOST=0.0.0.0 nuxt",

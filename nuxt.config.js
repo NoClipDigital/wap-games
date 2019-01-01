@@ -10,7 +10,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: "“What Am Politics?” Podcasting Triathalon",
     meta: [{
         charset: 'utf-8'
       },
@@ -22,6 +22,11 @@ module.exports = {
         hid: 'description',
         name: 'description',
         content: pkg.description
+      },
+      {
+        hid: `og:image`,
+        property: 'og:image',
+        content: `${projectVars.PublicPath}wap-img.jpg`
       }
     ],
     link: [{
@@ -32,7 +37,7 @@ module.exports = {
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Amatic+SC:400,700'
-      },
+      }
 
     ]
   },
@@ -53,7 +58,9 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+   { src: '~plugins/ga.js', ssr: false }
+ ],
 
   router: {
     base: projectVars.BuildPath

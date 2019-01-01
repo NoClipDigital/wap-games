@@ -1,6 +1,6 @@
 {
   "Config": {
-    "BuildPath": "/wap-games/",
-    "PublicPath": "http://gercarney.com/wap-games/"
+    "BuildPath": "/",
+    "PublicPath": "http://whatampolitics.games/"
   }
 }
